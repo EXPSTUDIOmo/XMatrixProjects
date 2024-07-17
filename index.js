@@ -33,18 +33,19 @@ app.use((req, res, next) => {
 
 // app.use(express.static('public'));
 
-app.use(express.static(path.join(__dirname, 'public'), {
-    setHeaders: (res, filePath) => {
-        if (filePath.endsWith('.mp4')) {
-            // Set Cache-Control header for MP4 videos
-            res.set('Cache-Control', 'public, max-age=7200000'); 
-        }
-    }
-}));
+// app.use(express.static(path.join(__dirname, 'public'), {
+//     setHeaders: (res, filePath) => {
+//         if (filePath.endsWith('.mp4')) {
+//             // Set Cache-Control header for MP4 videos
+//             res.set('Cache-Control', 'public, max-age=7200000'); 
+//         }
+//     }
+// }));
 
 
 
 app.get('/', (req, res) => {
+  console.log("heureka");
   res.sendFile(__dirname + '/public/index.html');
 });
 
