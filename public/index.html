@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FREEDOM COLLECTIVE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/favicon_io/site.webmanifest">
+    <link href="/css/output.css" rel="stylesheet">
+    <script type="text/javascript" src="/js/socket.io.js"></script>
+    <script type="text/javascript" src="/js/howler.min.js"></script>
+    <script src="NoSleep.min.js"></script>
+    <script defer src="/js/client.js" type="module"></script>
+  </head>
+  <body class="background fcheight">
+ 
+      <div id="startscreen" class="relative flex justify-center items-center w-screen fcheight">
+
+        <h1 class="absolute white-text text-4xl tracking-wider text-center top-10 fcfont text-shadow">
+            FREEDOM COLLECTIVE
+        </h1>
+
+        <div id="loading_container" class="flex justify-center items-center flex-col">
+          <div class="loader"></div>
+          <div class="loadertext fcfont"></div>
+        </div>
+       
+        
+        <div id="connect_btn_container" class="relative connect_btn rounded-full hidden">
+          <button id="connect_btn" class=" text-2xl w-36 h-36 py-2 px-2 rounded-full z-10 fcfont text-shadow">
+            CONNECT
+          </button>
+          <div class="pulse absolute w-36 h-36 pointer-events-none"></div>
+          <div class="pulse pulse2 absolute w-36 h-36 pointer-events-none"></div>
+        </div>
+
+
+      </div>  
+    
+
+    <div id="content" class="relative flex justify-center items-center w-screen fcheight hidden">
+
+      <!-- WAITSCREEN -->
+      <div id="waitscreen" class="relative flex justify-center items-center w-screen fcheight">
+        <h1 id="connectionStatus" class="absolute white-text text-center fcfont text-3xl top-28">
+          CONNECTED
+        </h1>
+        <img loading="lazy" id="waitavatar_secretary" src="img/avatars/secretary_white.png" class="screen-avatar secretary" width="100px">
+        <img loading="lazy" id="waitavatar_szusi" src="img/avatars/szusi_white.png" class="screen-avatar szusi" width="140px">
+        <img loading="lazy" id="waitavatar_fan" src="img/avatars/fan_white.png" class="screen-avatar fan" width="140px">
+        <img loading="lazy" id="waitavatar_karl" src="img/avatars/karl_white.png" class="screen-avatar karl" width="100px">
+        <img loading="lazy" id="waitavatar_andre" src="img/avatars/andre_white.png" class="screen-avatar andre" width="140px">
+      </div>
+
+      <!-- CHAT NOTIFICATION  -->
+      <div id="incomingchat" class="container relative block w-9/12 hidden border-solid border-4 white-border rounded-2xl px-4 py-4 chatstartanim cursor-pointer" style="background-color: rgba(66, 0, 40, 0.35); max-height: 20vh; min-height: 5rem;">
+        <h1 class="white-text font-Sanchez text-3xl text-center w-full">Unread Messages</h1>
+        <img loading="lazy" src="img/incomingchat_purple.png" width="80px" height="80px" class="top-0 right-0">
+      </div>
+
+      <!-- CHAT SCREEN -->
+      <div id="chatscreen" class="flex flex-col w-full h-full chat-bg hidden pb-28 font-Sanchez">
+
+        <div id="chattitle" class="flex items-center w-full chat-title">
+          <h1 class="fcfont">FREEDOM CHAT</h1>
+        </div>
+
+        <div id="chatheader" class="flex justify-between chat-header px-2 py-2">
+          <div class="flex items-center space-x-2">
+            <div id="chatavatar" class="rounded-full w-16 h-16 border-solid border border-white">
+              <img loading="lazy" src="img/avtarszusi.png" class="w-full h-full rounded-full">
+            </div>
+            <h1 class="white-text text-3xl ml-4 fcfont">ZSUZSI</h1>
+          </div>
+          
+          <div class="flex items-center space-x2">
+            <img loading="lazy" src="img/videocall.png" class="w-10">
+            <img loading="lazy" src="img/phonecall.png" class="w-6 h-6 ml-4">
+            <img loading="lazy" src="img/Menu.png" class="w-5 ml-4">
+          </div>
+        
+        </div>
+
+        <!-- CHAT CONTENT -->
+        <div id="chatcontent" class="overflow-y-auto bg-red w-full h-full pt-4 px-4 pb-20"></div>
+      </div>
+      
+
+      <!-- VIDEO SCREEN-->
+      <div id="videoscreen" class="relative flex justify-center items-center w-full h-full hidden bg-black">
+
+        <div id="videomask" class="fcfont w-full h-full">
+          <div id="vm_header" class="absolute left-4">
+            <h1 id="vm_name" class="text-4xl">ANDREI</h1>
+            <h2 id="vm_prof" class="mb-2">Boxer, 26</h2>
+          </div>
+          <div id="vm_footer" class="m-auto left-0 right-0 rounded">
+            <div id="vm_status" class="vm_container vm_halfwidth">
+              <h1 class="text-sm font-InterTight mb-1">STATUS</h1>
+              <p id="vm_status_value" class="font-sm">Non-citizen,<br> No coaching contracts</p>
+            </div>
+            <div id="vm_health" class="vm_container vm_halfwidth">
+              <h1 class="text-sm font-InterTight mb-1">HEALTH</h1>
+              <h1 id="vm_health_value" style="font-size: 2rem;">98</h1>
+              <p id="vm_health_subtext" style="font-size: 0.7rem">(nano chipped)</p>
+            </div>
+            <div id="vm_slogan" class="vm_container vm_fullwidth h-6">
+              <p id="vm_slogan_value" class="font-sm">Expecting the unexpected (ha ha)</p>
+            </div>
+          </div>
+        </div>
+        
+        <video id="video_1" src="https://freedomcdn.fra1.cdn.digitaloceanspaces.com/scaled_Zsuzsi_1_video.mp4" playsinline muted loop class="hidden video" preload="auto"></video>
+        <video id="video_2" src="https://freedomcdn.fra1.cdn.digitaloceanspaces.com/scaled_Zsuzsi_1_video.mp4" playsinline muted loop class="hidden video" preload="auto"></video>
+        <div id="video_tab_hint" class="hidden absolute fcfont white-text text-center text-2xl">Tap on video</div>
+        <div id="video_loading" class="hidden absolute bottom-16 loadertext_video fcfont  absolute m-auto mbt-4"></div>
+      </div>
+    </div>
+  </body>
+</html>
